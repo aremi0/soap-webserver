@@ -1,0 +1,144 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://example/infrastructure/sas-simulation-webservice"
+           targetNamespace="http://example/infrastructure/sas-simulation-webservice" elementFormDefault="qualified">
+
+    <xs:complexType name="genericResponse">
+        <xs:sequence>
+            <xs:element name="entitiesNumber" type="xs:int"/>
+            <xs:element name="httpCode" type="xs:int"/>
+            <xs:element name="description" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="sedeLavorativa">
+        <xs:sequence>
+            <xs:element name="id_sede" type="xs:long"/>
+            <xs:element name="responsabile_hub" type="tns:dipendente"/>
+            <xs:element name="citta_ubicazione" type="xs:string"/>
+            <xs:element name="indirizzo_ubicazione" type="xs:string"/>
+            <xs:element name="numero_posti_totali" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="isola">
+        <xs:sequence>
+            <xs:element name="id_isola" type="xs:long"/>
+            <xs:element name="sede_lavorativa" type="tns:sedeLavorativa"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="dipendente">
+        <xs:sequence>
+            <xs:element name="id_dipendente" type="xs:long"/>
+            <xs:element name="nome" type="xs:string"/>
+            <xs:element name="cognome" type="xs:string"/>
+            <xs:element name="data_di_nascita" type="xs:dateTime"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+
+    <xs:complexType name="country">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="population" type="xs:int"/>
+            <xs:element name="capital" type="xs:string"/>
+            <xs:element name="currency" type="tns:currency"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="currency">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="GBP"/>
+            <xs:enumeration value="EUR"/>
+            <xs:enumeration value="PLN"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+
+
+
+
+    <xs:element name="getCountryRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getCountryResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="country" type="tns:country"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:element name="GetDipendentiByIdSedeRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idSede" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetDipendentiByIdSedeResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="dipendenti" type="tns:dipendente" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="responseDetail" type="tns:genericResponse"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getSedeLavorativaRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getSedeLavorativaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="sedeLavorativa" type="tns:sedeLavorativa" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="responseDetail" type="tns:genericResponse"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getIsolaRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getIsolaResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="isola" type="tns:isola"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getDipendenteRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getDipendenteResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="dipendente" type="tns:dipendente"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
