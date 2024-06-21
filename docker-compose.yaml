@@ -28,12 +28,36 @@ services:
       - database
 
   simulatore-sas:
-    image: simulatore-sas
+    image: openjdk:17-alpine
     container_name: simulatore-sas
     ports:
       - "8081:8081"
     volumes:
       - ./target/sas-0.0.1-SNAPSHOT.jar:/app.jar
+    networks:
+      - infrastruttura
+    depends_on:
+      - database
+
+  simulatore-frontend:
+    image: openjdk:17-alpine
+    container_name: simulatore-frontend
+    ports:
+      - "8082:8082"
+    volumes:
+      - ../frontend/target/frontend-0.0.1-SNAPSHOT.jar:/app.jar
+    networks:
+      - infrastruttura
+    depends_on:
+      - database
+
+  microservizio:
+    image: openjdk:17-alpine
+    container_name: microservizio
+    ports:
+      - "8083:8083"
+    volumes:
+      - ../microservizio/target/microservizio-0.0.1-SNAPSHOT.jar:/app.jar
     networks:
       - infrastruttura
     depends_on:
