@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 @Endpoint
 public class MainEndpoint {
     private static final String NAMESPACE_URI = "http://example/infrastructure/sas-simulation-webservice";
-    private final Logger logger = Logger.getLogger("EndpointLogger");
+    private final Logger logger = Logger.getLogger("MainEndpoint_Logger");
     private final CountryRepository countryRepository;
     private final DipendenteRepository dipendenteRepository;
     private final SedeLavorativaRepository sedeLavorativaRepository;
@@ -52,15 +52,28 @@ public class MainEndpoint {
     @ResponsePayload
     public GetDipendenteResponse getDipendenteById(@RequestPayload GetDipendenteRequest request) {
         GetDipendenteResponse response = new GetDipendenteResponse();
-        logger.info("MainEndpoint ID: " + request.getId());
+        GenericResponse gn = new GenericResponse();
+
+        logger.info("MainEndpoint::getDipendenteById request ID: " + request.getId());
+        logger.info("MainEndpoint::getDipendenteById request received:\n" + request);
+
         Optional<DipendenteEntity> opt = dipendenteRepository.findById(request.getId());
+
         if (opt.isPresent()) {
-            logger.info("MainEndpoint oggetto trovato");
+            logger.info("MainEndpoint::getDipendenteById oggetto trovato");
             response.setDipendente(DipendenteMapper.toPojo(opt.get()));
+            gn.setEntitiesNumber(1);
+            gn.setHttpCode(200);
+            gn.setDescription("Success");
+
+            response.setResponseDetail(gn);
         }
         else {
-            logger.info("MainEndpoint NON oggetto trovato");
-            response.setDipendente(null);
+            logger.info("MainEndpoint::getDipendenteById NON oggetto trovato");
+            gn.setEntitiesNumber(0);
+            gn.setHttpCode(404);
+            gn.setDescription("Not found");
+            response.setResponseDetail(gn);
         }
         return response;
     }
@@ -71,12 +84,12 @@ public class MainEndpoint {
         GetSedeLavorativaResponse response = new GetSedeLavorativaResponse();
         GenericResponse gn = new GenericResponse();
 
-        logger.info("MainEndpoint ID: " + request.getId());
+        logger.info("MainEndpoint::getDipendenteById request ID: " + request.getId());
 
         Optional<SedeLavorativaEntity> opt = sedeLavorativaRepository.findById(request.getId());
 
         if(opt.isPresent()) {
-            logger.info("MainEndpoint oggetto trovato");
+            logger.info("MainEndpoint::getDipendenteById oggetto trovato");
             gn.setEntitiesNumber(1);
             gn.setHttpCode(200);
             gn.setDescription("Success");
@@ -85,7 +98,7 @@ public class MainEndpoint {
             response.getSedeLavorativa().add(SedeLavorativaMapper.toPojo(opt.get()));
 
         } else {
-            logger.info("MainEndpoint NON oggetto trovato");
+            logger.info("MainEndpoint::getDipendenteById oggetto NON trovato");
             gn.setEntitiesNumber(0);
             gn.setHttpCode(404);
             gn.setDescription("Not found");
@@ -94,18 +107,18 @@ public class MainEndpoint {
         return response;
     }
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetDipendentiByIdSedeRequest")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getDipendentiByIdSedeRequest")
     @ResponsePayload
     public GetDipendentiByIdSedeResponse getDipendentiByIdSede(@RequestPayload GetDipendentiByIdSedeRequest request) {
         GetDipendentiByIdSedeResponse response = new GetDipendentiByIdSedeResponse();
         GenericResponse gn = new GenericResponse();
 
-        logger.info("MainEndpoint ID: " + request.getIdSede());
+        logger.info("MainEndpoint::getDipendenteById request ID: " + request.getIdSede());
 
         List<DipendenteEntity> opt = dipendenteRepository.findDipendenteEntitiesByIdSede(request.getIdSede());
 
         if(!opt.isEmpty()) {
-            logger.info("MainEndpoint oggetto trovato");
+            logger.info("MainEndpoint::getDipendenteById oggetto trovato");
             gn.setEntitiesNumber(opt.size());
             gn.setHttpCode(200);
             gn.setDescription("Success");
@@ -117,7 +130,7 @@ public class MainEndpoint {
             }
 
         } else {
-            logger.info("MainEndpoint NON oggetto trovato");
+            logger.info("MainEndpoint::getDipendenteById oggetto NON trovato");
             gn.setEntitiesNumber(0);
             gn.setHttpCode(404);
             gn.setDescription("Not found");
