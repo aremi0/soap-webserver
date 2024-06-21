@@ -76,7 +76,7 @@
     </xs:element>
 
 
-    <xs:element name="GetDipendentiByIdSedeRequest">
+    <xs:element name="getDipendentiByIdSedeRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="idSede" type="xs:long"/>
@@ -84,7 +84,7 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="GetDipendentiByIdSedeResponse">
+    <xs:element name="getDipendentiByIdSedeResponse">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="dipendenti" type="tns:dipendente" minOccurs="0" maxOccurs="unbounded"/>
@@ -122,6 +122,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="isola" type="tns:isola"/>
+                <xs:element name="responseDetail" type="tns:genericResponse"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -138,6 +139,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="dipendente" type="tns:dipendente"/>
+                <xs:element name="responseDetail" type="tns:genericResponse"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
