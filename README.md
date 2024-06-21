@@ -25,6 +25,10 @@ directory. The JAR file has to be named `sas-0.0.1-SNAPSHOT.jar`.
 8. Run the JDK container through Docker-Desktop or re-launch `docker-compose up`.
 
 ## Requests
+- **GET** to `http://localhost:8081/ws/sas.wsdl` for the *wsdl contract*.
+
+**SOAP Protocol 1.1**   
+**SAAJ MessaFactory 1.3**  
 **Application used:** Insomnia <small>[link](https://insomnia.rest/)</small>  
 **URL:** http://localhost:8081/ws  
 **Method:** POST  
