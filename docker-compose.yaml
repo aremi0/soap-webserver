@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+
+  database:
+    image: mysql
+    container_name: database-sas
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: prenotazioni
+    ports:
+      - "3306:3306"
+    networks:
+      - infrastruttura
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-sas
+    environment:
+      PMA_HOST: database
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8080:80"
+    networks:
+      - infrastruttura
+    depends_on:
+      - database
+
+  simulatore-sas:
+    image: simulatore-sas
+    container_name: simulatore-sas
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./target/sas-0.0.1-SNAPSHOT.jar:/app.jar
+    networks:
+      - infrastruttura
+    depends_on:
+      - database
+
+networks:
+  infrastruttura:
+    name: infrastruttura
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+
+# docker-compose up
+# oppure in modalità detatched per non bloccare il terminale
+# docker-compose up -d
