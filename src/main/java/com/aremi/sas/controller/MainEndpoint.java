@@ -54,13 +54,12 @@ public class MainEndpoint {
         GetDipendenteResponse response = new GetDipendenteResponse();
         GenericResponse gn = new GenericResponse();
 
-        logger.info("MainEndpoint::getDipendenteById request ID: " + request.getId());
-        logger.info("MainEndpoint::getDipendenteById request received:\n" + request);
+        logger.info("MainEndpoint::getDipendenteById SOAP request received with ID: " + request.getId());
 
         Optional<DipendenteEntity> opt = dipendenteRepository.findById(request.getId());
 
         if (opt.isPresent()) {
-            logger.info("MainEndpoint::getDipendenteById oggetto trovato");
+            logger.info("MainEndpoint::getDipendenteById success!");
             response.setDipendente(DipendenteMapper.toPojo(opt.get()));
             gn.setEntitiesNumber(1);
             gn.setHttpCode(200);
@@ -69,7 +68,7 @@ public class MainEndpoint {
             response.setResponseDetail(gn);
         }
         else {
-            logger.info("MainEndpoint::getDipendenteById NON oggetto trovato");
+            logger.info("MainEndpoint::getDipendenteById not found!");
             gn.setEntitiesNumber(0);
             gn.setHttpCode(404);
             gn.setDescription("Not found");
