@@ -79,7 +79,7 @@
     <xs:element name="getDipendentiByIdSedeRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="idSede" type="xs:long"/>
+                <xs:element name="id" type="xs:long"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

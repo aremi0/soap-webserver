@@ -54,7 +54,7 @@ public class DipendenteService {
 
         logger.info("DipendenteService::getDipendenteById service started...");
 
-        List<DipendenteEntity> opt = dipendenteRepository.findDipendenteEntitiesByIdSede(request.getIdSede());
+        List<DipendenteEntity> opt = dipendenteRepository.findDipendenteEntitiesByIdSede(request.getId());
 
         if(!opt.isEmpty()) {
             logger.info("DipendenteService::getDipendentiByIdSede oggetto trovato");
