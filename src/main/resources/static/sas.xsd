@@ -35,6 +35,14 @@
         </xs:sequence>
     </xs:complexType>
 
+    <xs:complexType name="utente">
+        <xs:sequence>
+            <xs:element name="email" type="xs:string"/>
+            <xs:element name="password" type="xs:string"/>
+            <xs:element name="autorita" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
 
 
     <xs:complexType name="country">
@@ -75,6 +83,23 @@
         </xs:complexType>
     </xs:element>
 
+
+    <xs:element name="getUtenteByEmailRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="emailUtente" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getUtenteResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="utente" type="tns:utente"/>
+                <xs:element name="responseDetail" type="tns:genericResponse"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
     <xs:element name="getDipendentiByIdSedeRequest">
         <xs:complexType>

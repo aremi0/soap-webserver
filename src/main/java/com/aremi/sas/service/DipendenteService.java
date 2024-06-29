@@ -37,8 +37,7 @@ public class DipendenteService {
             gn.setDescription("Success");
 
             response.setResponseDetail(gn);
-        }
-        else {
+        } else {
             logger.info("DipendenteService::getDipendenteById not found!");
             gn.setEntitiesNumber(0);
             gn.setHttpCode(404);
