@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: database
--- Creato il: Giu 29, 2024 alle 13:15
+-- Creato il: Lug 01, 2024 alle 13:10
 -- Versione del server: 8.3.0
 -- Versione PHP: 8.2.8
 
@@ -365,12 +365,12 @@ CREATE TABLE `utente` (
 --
 
 INSERT INTO `utente` (`email`, `password`, `autorita`) VALUES
-('Carol.White@yahoo.com', 'qwerty', 'scrittura'),
-('Chase.Spinka@gmail.com', 'qwerty', 'lettura'),
-('Dorian.Luettgen@hotmail.com', 'qwerty', 'lettura'),
-('Lenny.Ruecker@yahoo.com', 'qwerty', 'scrittura'),
-('Margarita.Wunsch@gmail.com', 'qwerty', 'lettura'),
-('Shaniqua.Denesik@hotmail.com', 'qwerty', 'lettura');
+('Carol.White@yahoo.com', 'qwerty', 'superuser'),
+('Chase.Spinka@gmail.com', 'qwerty', 'user'),
+('Dorian.Luettgen@hotmail.com', 'qwerty', 'user'),
+('Lenny.Ruecker@yahoo.com', 'qwerty', 'superuser'),
+('Margarita.Wunsch@gmail.com', 'qwerty', 'user'),
+('Shaniqua.Denesik@hotmail.com', 'qwerty', 'user');
 
 --
 -- Indici per le tabelle scaricate
